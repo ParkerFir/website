@@ -1,0 +1,44 @@
+var data = [
+    {
+        "title": "2048",
+        "img": "./cover/2048.jpg",
+        "href": "./list/2048",
+        "text":" 快来拼凑2048吧 "
+    },
+    {
+        "title": "狂奔的忍者",
+        "img": "./cover/ninja.png",
+        "href": "./list/ninja",
+        "text":" 奔跑吧 ~ 上下上下 ~ 上上下下~ "
+    },
+    {
+        "title": "魔方",
+        "img": "./cover/RubikisCube.png",
+        "href": "./list/RubikisCube",
+        "text":" 挑战一下？？？"
+    },
+    {
+        "title": "见缝插针",
+        "img": "./cover/needle.png",
+        "href": "./list/needle",
+        "text":"考验手速的时候到了！！！"
+    },
+    {
+        "title": "山地摩托车",
+        "img": "./cover/motorcycles.png",
+        "href": "./list/motorcycles",
+        "text":" 冲冲冲 ~ ~ ~ "
+    },
+    {
+        "title": "萌怪大冒险",
+        "img": "./cover/mgdmx.png",
+        "href": "./list/mgdmx",
+        "text":" 看你能闯第几关！！！ "
+    },
+    {
+        "title": "中国象棋",
+        "img": "./cover/ChineseChess.png",
+        "href": "./list/ChineseChess",
+        "text":" 象走田 马走日 你的智力我来考~ "
+    }
+]

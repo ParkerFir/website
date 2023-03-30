@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <script src="./bootstrap/js/jquery.min.js"></script>
+    <script src="./bootstrap/js/showToast.js"></script>
+    <title>计算平均值</title>
+</head>
+<style type="text/css">
+    .input-group {
+        padding-top: 10px;
+    }
+    .table{
+        padding-top: 20px;
+    }
+</style>
+<body>
+    <div style="padding: 30px;">
+        <div class="input-group">
+            <span class="input-group-addon">平均值：</span>
+            <input type="number" class="form-control" placeholder="输入平均值" id="avg">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">个&nbsp;&nbsp;&nbsp;数：</span>
+            <input type="number" class="form-control" placeholder="输入生成的个数" id="count">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">最小值：</span>
+            <input type="number" class="form-control" placeholder="输入最小区间" id="min">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">最大值：</span>
+            <input type="number" class="form-control" placeholder="输入最大区间" id="max">
+        </div>
+        <div style="text-align: center;padding-top: 30px;">
+            <div class="btn-group" role="group">
+            <button type="button" class="btn btn-success" onclick="submit()" data-toggle="tooltip">生成</button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-warning" onclick="unset()">重置</button>
+        </div>
+        <div id="tables" class="table"></div>
+    </div>
+</body>
+<script type="text/javascript">
+    function submit()
+    {
+        var avg = $('#avg').val();
+        var count = $('#count').val();
+        var min = $('#min').val();
+        var max = $('#max').val();
+        if (!min|| !max || !avg|| !count) {
+            showToast('请将信息填写完整！')
+        }
+        if (min > max) {
+            showToast('最小值不能大于最大值！')
+        }
+        $.post("./rand.php",{
+            avg: avg,
+            count: count,
+            min: min,
+            max: max,
+        },
+        function(result){
+            result = JSON.parse(result);
+            var htmlData = `<table class="table">
+                                    <tbody>`;
+            if (result.code == 200) {
+                if (result.arr.length > 0) {
+                    htmlData += `<tr>`;
+                    for (var i = 0; i < result.arr.length; i++) {
+                        htmlData += `<td>${result.arr[i]}</td>
+                        </tr>`;
+                    }
+                } else {
+                    htmlData += 
+                        `<tr>
+                            <td>暂无数据</td>
+                        </tr>`;
+                }
+                htmlData += `</tbody>
+                    </table>`;
+                $('#tables').html(htmlData);
+            }
+        });
+    }
+    function unset()
+    {
+        $('#avg').val('');
+        $('#count').val('');
+        $('#min').val('');
+        $('#max').val('');
+        $('#tables').html('');
+    }
+</script>
+</html>
